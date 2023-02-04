@@ -1,14 +1,38 @@
 import './header.css';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { IoClose, IoMenu } from 'react-icons/io5';
 
 import Logo from '../../assets/logo.svg';
 const Header = () => {
+	const [lastScrollY, setLastScrollY] = useState(0);
 	const [toggle, setToggle] = useState(false);
+	const [show, setShow] = useState(false);
+
+	const controlNavbar = () => {
+		if (window.scrollY > 100) {
+			if (window.scrollY > lastScrollY) {
+				setShow(true);
+			} else {
+				setShow(false);
+			}
+			setLastScrollY(window.scrollY);
+		} else {
+			setShow(false);
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener('scroll', controlNavbar);
+
+		return () => {
+			window.removeEventListener('scroll', controlNavbar);
+		};
+	}, [lastScrollY]);
+
 	return (
-		<header className="header ">
+		<header className={`header ${show ? 'active' : ''}`}>
 			<div className="container">
 				<a href="#" className="logo">
 					<img src={Logo} alt="logo" width="187" height="38" />
