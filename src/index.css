@@ -228,3 +228,13 @@ body {
 .w-100 {
 	width: 100%;
 }
+
+.section-subtitle {
+	color: var(--text-majorelle-blue);
+	font-weight: var(--weight-medium);
+	text-transform: uppercase;
+}
+
+.section-title {
+	margin-block: 10px;
+}
